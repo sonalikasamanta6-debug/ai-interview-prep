@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login · AI Interview Prep</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    
+    body { min-height: 100vh; display:flex; align-items:center; justify-content:center; }
+    .auth-wrap { width: 960px; max-width: 96%; display:flex; gap: 28px; align-items:stretch; padding: 40px; }
+    .auth-left {
+      flex: 1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:18px;
+    }
+    .brand {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand .robot { font-size: 28px; }
+    .auth-card--small {
+      flex-basis: 420px;
+      max-width: 420px;
+      min-width: 300px;
+    }
+    .status {
+      background: rgba(255,255,255,0.06);
+      color: #fff0;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight:600;
+      transition: all .3s;
+      text-align:center;
+    }
+    .status.show { color: #ffd; background: rgba(255,215,0,0.12); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+
+    /* small responsive */
+    @media (max-width: 880px) {
+      .auth-wrap { flex-direction:column; padding: 20px; }
+      .auth-card--small { max-width: 100%; }
+      .auth-left { order:2; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-wrap">
+    <section class="auth-left">
+      <div class="brand">
+        <span class="robot">🤖</span>
+        <span>AI Interview Prep</span>
+      </div>
+
+      <div style="max-width:680px;">
+        <h2 style="color:#fff; font-size:28px; margin:12px 0 8px;">Ace every interview</h2>
+        <p style="color:#dbe8ff; font-size:15px; margin-bottom:6px;">
+          Real-time feedback, mock interviews and domain-specific practice — all in one app.
+        </p>
+
+        <% if (message) { %>
+          <div id="status" class="status show"><%= message %></div>
+        <% } else { %>
+          <div id="status" class="status" style="display:none;"></div>
+        <% } %>
+
+      </div>
+    </section>
+
+    
+    <aside class="auth-card auth-card--small">
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 style="color:#fff; margin:0; font-size:22px;">Welcome</h3>
+        <div style="font-size:14px; color:#cfe2ff;">
+          <span id="showLoginText">Have an account?</span>
+        </div>
+      </div>
+
+      <form id="form-login" action="/login" method="post" autocomplete="on" style="display:block;">
+        <label class="sr-only">Email</label>
+        <input name="email" type="email" placeholder="Enter your email" required />
+
+        <label class="sr-only">Password</label>
+        <input name="password" type="password" placeholder="Enter your password" required />
+
+        <button class="btn btn-primary" type="submit" style="margin-top:8px;">Login</button>
+
+        <p style="margin-top:12px; color:#cfe2ff; font-size:14px;">
+          Don't have an account? <button type="button" id="toggleToSignUp" class="btn" style="background:transparent;border:0;color:#bcd2ff; font-weight:700; text-decoration:underline; padding:0;">Create one</button>
+        </p>
+      </form>
+
+      <!-- SIGNUP FORM (hidden default) -->
+      <form id="form-signup" action="/signup" method="post" style="display:none;">
+        <label class="sr-only">Name</label>
+        <input name="name" type="text" placeholder="Enter your full name" required />
+
+        <label class="sr-only">Email</label>
+        <input name="email" type="email" placeholder="Enter your email" required />
+
+        <label class="sr-only">Password</label>
+        <input name="password" type="password" placeholder="Choose a password" required />
+
+        <label class="sr-only">Phone</label>
+        <input name="phone" type="tel" placeholder="Phone (optional)" />
+
+        <button class="btn btn-secondary" type="submit" style="margin-top:8px;">Create account</button>
+
+        <p style="margin-top:12px; color:#cfe2ff; font-size:14px;">
+          Already registered? <button type="button" id="toggleToLogin" class="btn" style="background:transparent;border:0;color:#bcd2ff; font-weight:700; text-decoration:underline; padding:0;">Sign in</button>
+        </p>
+      </form>
+    </aside>
+  </main>
+
+  <script>
+    const formLogin = document.getElementById('form-login');
+    const formSignup = document.getElementById('form-signup');
+    const toggleToSignUp = document.getElementById('toggleToSignUp');
+    const toggleToLogin = document.getElementById('toggleToLogin');
+    const statusEl = document.getElementById('status');
+
+    toggleToSignUp.addEventListener('click', () => {
+      formLogin.style.display = 'none';
+      formSignup.style.display = 'block';
+      if (statusEl) { statusEl.style.display = 'none'; }
+    });
+
+    toggleToLogin.addEventListener('click', () => {
+      formLogin.style.display = 'block';
+      formSignup.style.display = 'none';
+    });
+
+    // auto-hide status message after 3s if present
+    if (statusEl && statusEl.innerText.trim() !== '') {
+      setTimeout(() => {
+        statusEl.classList.remove('show');
+        statusEl.style.display = 'none';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

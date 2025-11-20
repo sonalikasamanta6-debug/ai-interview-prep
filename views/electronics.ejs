@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Interview Practice</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 AI Interview Practice</h1>
+    <p id="timer">05:00</p>
+    <div id="chatBox" class="chat-box"></div>
+    <textarea id="userInput" placeholder="Type your answer..."></textarea>
+    <button id="sendBtn" class="btn">Send</button>
+  </div>
+
+  <!-- jsPDF for result download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    // ---------- Questions and Answers ----------
+    
+
+    
+const questions = [
+  { q: "What is a diode?", a: "Allows current in one direction" },
+  { q: "What is a transistor?", a: "Used for amplification and switching" },
+  { q: "What is Ohm's Law?", a: "V equals I times R" },
+  { q: "What is a capacitor used for?", a: "Stores electrical energy" },
+  { q: "What is the difference between AC and DC?", a: "AC changes direction, DC flows one way" }
+];
+
+    let qIndex = 0, score = 0, time = 300, answers = [];
+    const chat = document.getElementById("chatBox");
+    const input = document.getElementById("userInput");
+    const timer = document.getElementById("timer");
+
+    // ---------- Text to Speech ----------
+    function speak(text){
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-US";
+      utter.rate = 1.0;
+      speechSynthesis.speak(utter);
+    }
+
+    // ---------- Display next question ----------
+    function askQuestion(){
+      if(qIndex < questions.length){
+        const q = questions[qIndex].q;
+        chat.innerHTML += `<p class="question">Q${qIndex + 1}: ${q}</p>`;
+        speak(q);
+      } else {
+        finishInterview();
+      }
+    }
+
+    // ---------- Timer ----------
+    function updateTimer(){
+      const mins = Math.floor(time / 60);
+      const secs = time % 60;
+      timer.textContent = `${mins}:${secs.toString().padStart(2,"0")}`;
+      if(time-- > 0) setTimeout(updateTimer, 1000);
+      else finishInterview();
+    }
+
+    // ---------- Answer submission ----------
+    document.getElementById("sendBtn").onclick = () => {
+      const val = input.value.trim();
+      if(!val) return;
+
+      const correctAns = questions[qIndex].a.toLowerCase();
+      const isCorrect = val.toLowerCase().includes(correctAns);
+      if(isCorrect) score++;
+
+      answers.push({
+        question: questions[qIndex].q,
+        yourAnswer: val,
+        correct: questions[qIndex].a,
+        result: isCorrect ? "✅ Correct" : "❌ Incorrect"
+      });
+
+      chat.innerHTML += `
+        <p class="answer">💬 ${val}</p>
+        <p class="result">${isCorrect ? "✅ Correct!" : "❌ Not quite. Correct: " + questions[qIndex].a}</p>
+      `;
+
+      input.value = "";
+      qIndex++;
+      askQuestion();
+    };
+
+    // ---------- End of Interview ----------
+    function finishInterview(){
+      const percent = ((score / questions.length) * 100).toFixed(1);
+      chat.innerHTML += `<p class="score">🏁 Interview finished — Score: ${score}/${questions.length} (${percent}%)</p>`;
+      generatePDF(percent);
+    }
+
+    // ---------- Generate PDF ----------
+    function generatePDF(percent){
+      const doc = new jsPDF();
+      let y = 20;
+
+      doc.setFontSize(18);
+      doc.text("AI Interview Practice Report", 20, y);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text(`Date: ${new Date().toLocaleString()}`, 20, y);
+      y += 10;
+      doc.text(`Score: ${percent}%`, 20, y);
+      y += 10;
+      doc.line(20, y, 190, y);
+      y += 10;
+
+      answers.forEach((item, i) => {
+        doc.text(`Q${i + 1}: ${item.question}`, 20, y);
+        y += 8;
+        doc.text(`Your Answer: ${item.yourAnswer}`, 25, y);
+        y += 8;
+        doc.text(`Correct: ${item.correct}`, 25, y);
+        y += 8;
+        doc.text(`${item.result}`, 25, y);
+        y += 10;
+        if (y > 270) { doc.addPage(); y = 20; }
+      });
+
+      doc.save(`AI_Interview_Result_${Date.now()}.pdf`);
+    }
+
+    // ---------- Start interview ----------
+    chat.innerHTML = "<p>Welcome — your timed interview starts now!</p>";
+    askQuestion();
+    updateTimer();
+  </script>
+</body>
+</html>

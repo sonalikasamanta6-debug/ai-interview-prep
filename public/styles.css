@@ -1,0 +1,507 @@
+/* ===== Universal Page Reset ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== Background Styling for All Pages ===== */
+body {
+  color: #ffffff;
+  background: 
+    linear-gradient(rgba(14, 20, 45, 0.7), rgba(14, 20, 45, 0.7)),
+    url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80')
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Hero / Home Page ===== */
+.hero {
+  text-align: center;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  padding: 60px 70px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.8s ease-in;
+}
+
+.hero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #e3e9ff;
+  margin-bottom: 25px;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+  margin: 5px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255, 255, 255, 0.25);
+}
+
+/* Button color variants */
+.btn-primary {
+  background: linear-gradient(90deg, #377dff, #6a9fff);
+}
+.btn-secondary {
+  background: linear-gradient(90deg, #7a5cff, #b197ff);
+}
+.btn-success {
+  background: linear-gradient(90deg, #00c48c, #1ae3a3);
+}
+.btn-warning {
+  background: linear-gradient(90deg, #f9b500, #ffcc4d);
+}
+
+/* ===== Auth Card (Login / Signup) ===== */
+.auth-card {
+  width: 500px;
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 40px 50px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 0.9s ease-in-out;
+}
+
+.auth-card h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.auth-card input[type="email"],
+.auth-card input[type="password"],
+.auth-card input[type="text"],
+.auth-card input[type="tel"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  font-weight: 600;
+  color: #0e2340;
+  outline: none;
+}
+
+.auth-card input:focus {
+  border: 2px solid #377dff;
+  box-shadow: 0 0 8px rgba(55, 125, 255, 0.4);
+}
+
+.auth-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.auth-card a {
+  display: inline-block;
+  margin-top: 14px;
+  color: #bcd2ff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ===== Dashboard Card ===== */
+.dashboard-card {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 60px 80px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  max-width: 700px;
+  width: 90%;
+}
+
+.dashboard-card h1 {
+  font-size: 38px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 17px;
+  color: #c8d8ff;
+  margin-bottom: 30px;
+}
+
+/* Domain Buttons */
+.dashboard-card .btn {
+  min-width: 170px;
+}
+
+/* Logout Link */
+.logout {
+  display: block;
+  margin-top: 30px;
+  color: #bcd2ff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* ===== Domain Interview Pages (AI / Data / Electronics) ===== */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px 20px;
+  background: 
+    linear-gradient(rgba(14, 20, 45, 0.7), rgba(14, 20, 45, 0.7)),
+    url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=80")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+}
+
+/* Page Title */
+.container h1 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Timer */
+#timer {
+  font-size: 22px;
+  color: #a9c3ff;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Chat Box */
+.chat-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  border-radius: 15px;
+  padding: 25px 30px;
+  width: 90%;
+  max-width: 700px;
+  min-height: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  margin-bottom: 25px;
+  text-align: left;
+  color: #f0f5ff;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Scrollbar styling */
+.chat-box::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 6px;
+}
+
+/* Questions and answers formatting */
+.question {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.answer {
+  margin: 10px 0 5px 15px;
+  color: #cde3ff;
+}
+
+.result {
+  margin: 0 0 12px 15px;
+  font-style: italic;
+  color: #ffde8a;
+}
+
+.score {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* Input area */
+#userInput {
+  width: 80%;
+  max-width: 600px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  resize: none;
+  margin-bottom: 15px;
+  color: #0e2340;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: 0.3s ease;
+}
+
+#userInput:focus {
+  box-shadow: 0 0 12px rgba(55, 125, 255, 0.4);
+  border: 2px solid #377dff;
+}
+
+/* Send Button */
+#sendBtn.btn {
+  background: linear-gradient(90deg, #377dff, #6a9fff);
+  padding: 14px 34px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+#sendBtn.btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #4a8bff, #85b3ff);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container h1 {
+    font-size: 30px;
+  }
+
+  #userInput {
+    width: 95%;
+  }
+
+  #sendBtn.btn {
+    width: 60%;
+  }
+}
+
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hero, .auth-card, .dashboard-card {
+    padding: 30px;
+  }
+  .hero h1 {
+    font-size: 30px;
+  }
+} 
+/* Admin panel tweaks */
+.admin-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.admin-card {
+  width: 92%;
+  max-width: 1000px;
+  padding: 40px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+.users-table thead th {
+  text-align: left;
+  padding: 14px 12px;
+  font-weight: 700;
+  color: #e8f0ff;
+}
+
+.users-table tbody tr {
+  border-top: 1px solid rgba(255,255,255,0.02);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+}
+
+.users-table tbody td {
+  padding: 18px 12px;
+  vertical-align: middle;
+  color: #eaf2ff;
+}
+
+/* Actions column */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+/* Admin buttons */
+.admin-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 120px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform .12s;
+  color: #06203a;
+}
+
+.admin-btn:hover { transform: translateY(-3px); }
+
+.admin-btn.promote {
+  background: linear-gradient(90deg,#28c76f,#6be78b);
+}
+
+.admin-btn.demote {
+  background: linear-gradient(90deg,#ffb86b,#ff8559);
+  color: #06203a;
+}
+
+.admin-btn.delete {
+  background: linear-gradient(90deg,#ff6b6b,#ff9a9a);
+  color: #06203a;
+}
+
+/* disabled (self) */
+.admin-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
+/* make actions column always visible on small screens */
+@media (max-width: 720px) {
+  .actions { align-items: stretch; }
+  .admin-btn { width: 100%; min-width: unset; }
+}
+/* === HERO SECTION BUTTONS === */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0 32px;
+}
+
+.btn-primary,
+.btn-outline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+/* Primary Button — gradient + glow */
+.btn-primary {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.6);
+}
+
+/* Outline Button — transparent with border */
+.btn-outline {
+  border: 2px solid #00b4ff;
+  color: #00b4ff;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: #00b4ff;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 180, 255, 0.5);
+}
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn-primary, .btn-outline {
+    width: 80%;
+  }
+}

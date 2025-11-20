@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign Up · AI Interview Prep</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    .signup-box {
+      width:420px; max-width:94%;
+      background: rgba(255,255,255,0.06);
+      padding: 36px;
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+      color: #fff;
+      text-align:center;
+    }
+    .signup-box h1 { margin-bottom:12px; font-size:28px; }
+    .status { margin-bottom:12px; color:#ffd700; font-weight:700; }
+    .signup-box input { width:100%; margin:8px 0; padding:12px 14px; border-radius:10px; border:none; background:rgba(255,255,255,0.9); color:#0e2340; font-weight:600; }
+    .signup-box .btn { margin-top:12px; width:100%; }
+    .signup-box p { margin-top:14px; color:#cfe4ff; }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <h1>Create your account</h1>
+
+    <% if (message) { %>
+      <div class="status"><%= message %></div>
+    <% } %>
+
+    <form action="/signup" method="post" autocomplete="on">
+      <input name="name" type="text" placeholder="Full name" required />
+      <input name="email" type="email" placeholder="Email address" required />
+      <input name="password" type="password" placeholder="Choose a password" required />
+      <input name="phone" type="tel" placeholder="Phone (optional)" />
+      <button class="btn btn-primary" type="submit">Sign up</button>
+    </form>
+
+    <p>Already have an account? <a href="/auth" style="color:#bcd2ff; font-weight:700;">Sign in</a></p>
+  </div>
+</body>
+</html>

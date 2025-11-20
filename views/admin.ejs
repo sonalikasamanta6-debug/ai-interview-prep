@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main class="admin-page">
+    <section class="dashboard-card admin-card">
+      <h1>Admin Panel</h1>
+      <p class="muted">Welcome, <strong><%= adminName %></strong></p>
+
+      <div class="table-wrap">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Role</th>
+              <th class="actions-col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.name || user.username || "—" %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone || "—" %></td>
+                <td class="role-cell"><%= user.roles %></td>
+                <td>
+                  <div class="actions">
+                    <% const isSelf = ('' + user._id) === ('' + currentAdminId); %>
+
+                    <% if (user.roles === "USER") { %>
+                      <button class="admin-btn promote" data-id="<%= user._id %>" <%= isSelf ? 'disabled title="This is you"' : '' %>>Promote</button>
+                    <% } else { %>
+                      <button class="admin-btn demote" data-id="<%= user._id %>" <%= isSelf ? 'disabled title="This is you"' : '' %>>Demote</button>
+                    <% } %>
+
+                    <button class="admin-btn delete" data-id="<%= user._id %>" <%= isSelf ? 'disabled title="This is you"' : '' %>>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="text-align:center; margin-top:28px;">
+        <a class="link" href="/user">Back to Dashboard</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="admin,js"></script>
+
+</body>
+</html>

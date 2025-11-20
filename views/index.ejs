@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Interview Prep</title>
+
+  
+  <link rel="stylesheet" href="/styles.css" />
+  
+
+  <style>
+    .demo-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .demo-modal[aria-hidden="false"] { display:flex; }
+    .demo-backdrop {
+      position:absolute; inset:0;
+      background: rgba(3,8,20,0.7);
+      backdrop-filter: blur(6px);
+    }
+    .demo-panel {
+      position:relative;
+      z-index:2;
+      width:min(1000px,94%);
+      max-width:980px;
+      border-radius: 14px;
+      padding:18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+    }
+    .demo-video{ width:100%; height:auto; border-radius:10px; display:block; background:#000; }
+    .demo-close{
+      position:absolute; top:12px; right:12px;
+      border:0; background: rgba(255,255,255,0.06);
+      color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:700;
+    }
+    .demo-controls{ display:flex; gap:8px; justify-content:center; margin-top:12px; }
+    .small{ padding:8px 14px; border-radius:999px; border:0; cursor:pointer; background: rgba(255,255,255,0.06); color:#fff; font-weight:600; }
+    .small.primary{ background: linear-gradient(90deg,#00a0ff,#00d4ff); color:#fff; }
+    @media (max-width:700px){ .demo-panel{ padding:12px; } .demo-close{ padding:6px 8px; } }
+  </style>
+</head>
+<body>
+  <!-- ===== HERO - keep your current hero markup & classes so your styles.css still applies ===== -->
+  <main class="page">
+    <section class="hero" role="region" aria-label="Hero">
+      <h1>Ace Every Interview with AI-Driven Practice</h1>
+      <p class="lead">Real-time feedback, mock interviews, and expert questions tailored to your role — all in one app.</p>
+
+      <div class="hero-buttons">
+        <a href="/auth" class="btn btn-primary">🚀 Start Practicing Free</a>
+        <button id="watchDemoBtn" class="btn btn-outline">🎬 Watch Demo</button>
+      </div>
+
+      <ul class="checklist" aria-hidden="false">
+        <li>Behavioral & technical interview questions</li>
+        <li>Instant AI feedback on your answers</li>
+        <li>Personalized improvement tips</li>
+        <li>Simulates real interview pressure</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ===== DEMO MODAL ===== -->
+  <div id="demoModal" class="demo-modal" aria-hidden="true" role="dialog" aria-label="Demo video">
+    <div class="demo-backdrop" data-backdrop></div>
+
+    <div class="demo-panel" role="document">
+      <button id="demoCloseBtn" class="demo-close" aria-label="Close demo">✕</button>
+
+      <!--
+        Put a 5s H.264 mp4 at: public/videos/demo.mp4
+        Optional poster image: public/images/demo-poster.jpg
+      -->
+      <video id="demoVideo" class="demo-video" playsinline muted preload="auto" poster="/images/demo-poster.jpg" aria-label="Demo video">
+        <source src="videos/8464662-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+        Your browser does not support the video element.
+      </video>
+
+      <div class="demo-controls">
+        <button id="demoReplay" class="small">Replay</button>
+        <a href="/auth" class="small primary">Start Practising</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Demo script: plays & auto-closes after 5s (5000ms) ===== -->
+  <script>
+    (function(){
+      const watchBtn = document.getElementById('watchDemoBtn');
+      const modal = document.getElementById('demoModal');
+      const video = document.getElementById('demoVideo');
+      const closeBtn = document.getElementById('demoCloseBtn');
+      const replayBtn = document.getElementById('demoReplay');
+      const backdrop = document.querySelector('[data-backdrop]');
+
+      // show for 5000 ms (5 seconds)
+      const DEMO_MS = 5000;
+      let autoCloseTimer = null;
+
+      function openModal(){
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        try { video.currentTime = 0; } catch(e){}
+        video.muted = true;       // important for autoplay in many browsers
+        video.controls = false;
+        const p = video.play();
+        if (p && p.catch) {
+          p.catch(err => {
+            // if autoplay blocked, show controls so user can play
+            video.controls = true;
+          });
+        }
+        if (autoCloseTimer) clearTimeout(autoCloseTimer);
+        autoCloseTimer = setTimeout(closeModal, DEMO_MS);
+      }
+
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+        try { video.pause(); video.currentTime = 0; } catch(e){}
+        if (autoCloseTimer){ clearTimeout(autoCloseTimer); autoCloseTimer = null; }
+        video.controls = false;
+      }
+
+      function replay(){
+        try { video.currentTime = 0; } catch(e){}
+        video.muted = true;
+        video.controls = false;
+        const p = video.play();
+        if (p && p.catch) p.catch(()=> video.controls = true);
+        if (autoCloseTimer) clearTimeout(autoCloseTimer);
+        autoCloseTimer = setTimeout(closeModal, DEMO_MS);
+      }
+
+      if (watchBtn) watchBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (replayBtn) replayBtn.addEventListener('click', replay);
+
+      // close when clicking backdrop
+      if (backdrop) backdrop.addEventListener('click', closeModal);
+
+      // close on Escape
+      window.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+          closeModal();
+        }
+      });
+
+      video.addEventListener('ended', () => {
+        if (autoCloseTimer) { clearTimeout(autoCloseTimer); autoCloseTimer = setTimeout(closeModal, 350); }
+      });
+    })();
+  </script>
+</body>
+</html>

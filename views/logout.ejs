@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Logout · AI Interview Prep</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    body { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+    .logout-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      text-align:center;
+      width: 420px;
+      max-width: 94%;
+      color:#fff;
+    }
+    .logout-card h2 { margin-bottom:12px; }
+    .logout-actions { display:flex; justify-content:center; gap:14px; margin-top:18px; }
+    .btn-logout { background:#ff6b6b; padding:10px 18px; border-radius:10px; color:#fff; font-weight:700; border:none; cursor:pointer; }
+    .btn-cancel { background:transparent; color:#cfe4ff; text-decoration:underline; border:none; cursor:pointer; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="logout-card">
+    <h2>Confirm Logout</h2>
+    <p>You will be signed out of your account. Are you sure?</p>
+
+    <div class="logout-actions">
+      <a href="/logout" class="btn-logout">Yes, Logout</a>
+      <a href="/user" class="btn-cancel">Cancel</a>
+    </div>
+  </div>
+</body>
+</html>
