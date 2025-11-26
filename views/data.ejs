@@ -20,8 +20,7 @@
   <script>
     const { jsPDF } = window.jspdf;
 
-    // ---------- Questions and Answers ----------
-   
+    
 const questions = [
   { q: "What is data science?", a: "Study of data to extract insights" },
   { q: "What is supervised learning?", a: "Learning from labeled data" },
@@ -36,7 +35,7 @@ const questions = [
     const input = document.getElementById("userInput");
     const timer = document.getElementById("timer");
 
-    // ---------- Text to Speech ----------
+    
     function speak(text){
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = "en-US";
@@ -44,7 +43,7 @@ const questions = [
       speechSynthesis.speak(utter);
     }
 
-    // ---------- Display next question ----------
+    
     function askQuestion(){
       if(qIndex < questions.length){
         const q = questions[qIndex].q;
@@ -55,7 +54,7 @@ const questions = [
       }
     }
 
-    // ---------- Timer ----------
+    
     function updateTimer(){
       const mins = Math.floor(time / 60);
       const secs = time % 60;
@@ -64,7 +63,7 @@ const questions = [
       else finishInterview();
     }
 
-    // ---------- Answer submission ----------
+    
     document.getElementById("sendBtn").onclick = () => {
       const val = input.value.trim();
       if(!val) return;
@@ -90,7 +89,7 @@ const questions = [
       askQuestion();
     };
 
-    // ---------- End of Interview ----------
+  
     function finishInterview(){
       const percent = ((score / questions.length) * 100).toFixed(1);
       chat.innerHTML += `<p class="score">🏁 Interview finished — Score: ${score}/${questions.length} (${percent}%)</p>`;
@@ -128,7 +127,7 @@ const questions = [
       doc.save(`AI_Interview_Result_${Date.now()}.pdf`);
     }
 
-    // ---------- Start interview ----------
+    
     chat.innerHTML = "<p>Welcome — your timed interview starts now!</p>";
     askQuestion();
     updateTimer();
