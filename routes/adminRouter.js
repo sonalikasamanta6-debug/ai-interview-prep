@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
 
 router.post("/promote", async (req, res) => {
   try {
+    console.log(req.body)
     const { id } = req.body;
     if (!id) return res.status(400).json({ ok: false, message: "Missing id" });
     await User.findByIdAndUpdate(id, { roles: "ADMIN" });
