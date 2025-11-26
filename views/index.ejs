@@ -47,7 +47,7 @@
   </style>
 </head>
 <body>
-  <!-- ===== HERO - keep your current hero markup & classes so your styles.css still applies ===== -->
+
   <main class="page">
     <section class="hero" role="region" aria-label="Hero">
       <h1>Ace Every Interview with AI-Driven Practice</h1>
@@ -74,10 +74,6 @@
     <div class="demo-panel" role="document">
       <button id="demoCloseBtn" class="demo-close" aria-label="Close demo">✕</button>
 
-      <!--
-        Put a 5s H.264 mp4 at: public/videos/demo.mp4
-        Optional poster image: public/images/demo-poster.jpg
-      -->
       <video id="demoVideo" class="demo-video" playsinline muted preload="auto" poster="/images/demo-poster.jpg" aria-label="Demo video">
         <source src="videos/8464662-uhd_3840_2160_25fps.mp4" type="video/mp4" />
         Your browser does not support the video element.
@@ -90,7 +86,6 @@
     </div>
   </div>
 
-  <!-- ===== Demo script: plays & auto-closes after 5s (5000ms) ===== -->
   <script>
     (function(){
       const watchBtn = document.getElementById('watchDemoBtn');
@@ -100,7 +95,7 @@
       const replayBtn = document.getElementById('demoReplay');
       const backdrop = document.querySelector('[data-backdrop]');
 
-      // show for 5000 ms (5 seconds)
+      
       const DEMO_MS = 5000;
       let autoCloseTimer = null;
 
@@ -108,12 +103,12 @@
         modal.setAttribute('aria-hidden','false');
         document.body.style.overflow = 'hidden';
         try { video.currentTime = 0; } catch(e){}
-        video.muted = true;       // important for autoplay in many browsers
+        video.muted = true;       
         video.controls = false;
         const p = video.play();
         if (p && p.catch) {
           p.catch(err => {
-            // if autoplay blocked, show controls so user can play
+            
             video.controls = true;
           });
         }
@@ -142,8 +137,6 @@
       if (watchBtn) watchBtn.addEventListener('click', openModal);
       if (closeBtn) closeBtn.addEventListener('click', closeModal);
       if (replayBtn) replayBtn.addEventListener('click', replay);
-
-      // close when clicking backdrop
       if (backdrop) backdrop.addEventListener('click', closeModal);
 
       // close on Escape
